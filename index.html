@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Game - Start</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Memory Game</h1>
+
+    <form id="startForm">
+      <label for="level">Choose Level:</label>
+      <select id="level" name="level" required>
+        <option value="easy">Easy (6 Cards)</option>
+        <option value="medium">Medium (10 Cards)</option>
+        <option value="hard">Hard (16 Cards)</option>
+        <option value="extreme">Extreme (26 Cards)</option>
+      </select>
+
+      <label>Number of Players:</label>
+      <div class="player-options">
+        <label><input type="radio" name="players" value="1" checked /> 1 Player</label>
+        <label><input type="radio" name="players" value="2" /> 2 Players</label>
+      </div>
+
+      <div id="playerNames">
+        <input type="text" name="player1" placeholder="Player 1 Name" required />
+      </div>
+
+      <button type="submit" class="btn">Start Game</button>
+      <button type="button" class="btn" onclick="location.href='results.html'">View Results</button>
+    </form>
+  </div>
+
+  <script>
+    const playerOptions = document.querySelectorAll('input[name="players"]');
+    const playerNamesDiv = document.getElementById("playerNames");
+
+    playerOptions.forEach(option => {
+      option.addEventListener("change", () => {
+        playerNamesDiv.innerHTML = '';
+        const count = parseInt(option.value);
+        for (let i = 1; i <= count; i++) {
+          const input = document.createElement("input");
+          input.type = "text";
+          input.name = `player${i}`;
+          input.placeholder = `Player ${i} Name`;
+          input.required = true;
+          playerNamesDiv.appendChild(input);
+        }
+      });
+    });
+
+    document.getElementById("startForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+      localStorage.setItem("memoryGameSettings", JSON.stringify(data));
+      window.location.href = "game.html";
+    });
+  </script>
+</body>
+</html>

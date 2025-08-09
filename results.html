@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Game Results</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Game Results</h1>
+    <ul id="resultsList"></ul>
+    <div class="btn-group">
+      <button class="btn" onclick="location.href='index.html'">Back to Home</button>
+      <button class="btn" onclick="clearResults()">Clear Results</button>
+    </div>
+  </div>
+
+  <script>
+    const results = JSON.parse(localStorage.getItem("memoryGameResults")) || [];
+    const list = document.getElementById("resultsList");
+
+    results.forEach(result => {
+      const li = document.createElement("li");
+      const outcome = result.outcome?.toLowerCase().includes("win") ? "Win" : "Lose";
+      li.textContent = `${result.players} - Level: ${result.level} - Time: ${result.time}s - ${outcome}`;
+      list.appendChild(li);
+    });
+
+    function clearResults() {
+      localStorage.removeItem("memoryGameResults");
+      location.reload();
+    }
+  </script>
+</body>
+</html>
