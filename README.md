@@ -35,7 +35,6 @@ style.css     # Styling (pink & purple theme)
 script.js     # Game logic
 
 🚀 How to Play
-Open index.html in your browser.
 
 Choose the difficulty level and number of players.
 
@@ -44,3 +43,6 @@ Enter player name(s).
 Match all the pairs before the timer runs out.
 
 Check your results on the results page.
+
+Try it now 🔥
+https://haneensalama12.github.io/Memory-Game-project-/
